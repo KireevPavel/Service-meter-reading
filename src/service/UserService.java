@@ -7,7 +7,8 @@ import java.util.Scanner;
 
 public class UserService {
     UserStorage userStorage = new UserStorage();
-    public void authorization(Scanner scanner) {
+    public void authorization() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Пожалуйста введите логин");
         String login = scanner.nextLine();
         User userLogin = null;
@@ -27,5 +28,15 @@ public class UserService {
                 System.out.println("Добро пожаловать");
             }
         }
+    }
+
+    public void registration(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Пожалуйста введите логин");
+        String login = scanner.nextLine();
+        System.out.println("Пожалуйста введите пароль");
+        String password = scanner.nextLine();
+        User user = new User(0,login, password, "new");
+        userStorage.add(user);
     }
 }

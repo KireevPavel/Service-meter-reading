@@ -1,10 +1,11 @@
+import service.UserService;
 import storage.user.UserStorage;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
+        UserService userService = new UserService();
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -14,10 +15,10 @@ public class Main {
             switch (command) {
 
                 case 1:
-
+                    userService.registration();
                     break;
                 case 2:
-
+userService.authorization();
                     break;
                 case 3:
 

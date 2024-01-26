@@ -31,4 +31,6 @@ public class UserStorage {
         } else throw new NotFoundException("User not found.");
     }
 
+    public void add(int i, String login, String password, String aNew) {
+    }
 }
