@@ -5,10 +5,13 @@ import model.User;
 import model.WaterMeter;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class WaterMeterStorage {
 
-    private final HashMap<Integer, WaterMeter> waterMeters = new HashMap<>();
+
+
+    private final LinkedHashMap<Integer, WaterMeter> waterMeters = new LinkedHashMap<>();
     private int id = 0;
 
     private int generateId() {
@@ -25,5 +28,9 @@ public class WaterMeterStorage {
         if (waterMeters.containsKey(id)) {
             return waterMeters.get(id);
         } else throw new NotFoundException("WaterMeter not found.");
+    }
+
+    public LinkedHashMap<Integer, WaterMeter> getWaterMeters() {
+        return waterMeters;
     }
 }

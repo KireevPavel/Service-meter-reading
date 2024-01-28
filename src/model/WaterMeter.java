@@ -1,20 +1,19 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class WaterMeter {
     int id;
     double volume;
     int month;
-    int year;
     boolean hot;
     User user;
 
-    public WaterMeter(int id, double volume, int month, int year, boolean hot, User user) {
+    public WaterMeter(int id, double volume, int month, boolean hot, User user) {
         this.id = id;
         this.volume = volume;
         this.month = month;
-        this.year = year;
         this.hot = hot;
         this.user = user;
     }
@@ -43,14 +42,6 @@ public class WaterMeter {
         this.month = month;
     }
 
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
     public boolean isHot() {
         return hot;
     }
@@ -72,11 +63,22 @@ public class WaterMeter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WaterMeter that = (WaterMeter) o;
-        return id == that.id && Double.compare(volume, that.volume) == 0 && month == that.month && year == that.year && hot == that.hot && Objects.equals(user, that.user);
+        return id == that.id && Double.compare(volume, that.volume) == 0 && month == that.month && hot == that.hot && Objects.equals(user, that.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, volume, month, year, hot, user);
+        return Objects.hash(id, volume, month, hot, user);
+    }
+
+    @Override
+    public String toString() {
+        return "WaterMeter{" +
+                "id=" + id +
+                ", volume=" + volume +
+                ", month=" + month +
+                ", hot=" + hot +
+                ", user=" + user +
+                '}';
     }
 }

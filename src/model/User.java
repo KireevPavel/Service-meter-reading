@@ -6,12 +6,14 @@ public class User {
     int id;
     String login;
     String password;
+    boolean loggedIn;
     String status;
 
-    public User(int id, String login, String password, String status) {
+    public User(int id, String login, String password, boolean loggedIn, String status) {
         this.id = id;
         this.login = login;
         this.password = password;
+        this.loggedIn = loggedIn;
         this.status = status;
     }
 
@@ -39,6 +41,14 @@ public class User {
         this.password = password;
     }
 
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -52,11 +62,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(login, user.login) && Objects.equals(password, user.password) && Objects.equals(status, user.status);
+        return id == user.id && loggedIn == user.loggedIn && login.equals(user.login) && password.equals(user.password) && status.equals(user.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, password, status);
+        return Objects.hash(id, login, password, loggedIn, status);
     }
 }
