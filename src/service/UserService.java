@@ -45,4 +45,9 @@ public class UserService {
         userStorage.add(user);
         return user;
     }
+
+    public void setAdminStatus(int id){
+        User user = userStorage.getById(id);
+        user.setStatus("admin");
+    }
 }

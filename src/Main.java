@@ -19,10 +19,11 @@ public class Main {
                 int command = scanner.nextInt();
 
                 switch (command) {
-
                     case 1:
                         if(user == null){
                             System.out.println("требуется авторизация");
+                        }else if(user.getStatus().equals("admin")) {
+                            System.out.println(waterMeterService.getLastMeterReadingsForAdmin().toString());
                         }else {
                             System.out.println(waterMeterService.getLastMeterReadings(user).toString());
                         }
@@ -36,6 +37,10 @@ public class Main {
                         break;
                     case 3:if(user == null){
                         System.out.println("требуется авторизация");
+                    }else if (user.getStatus().equals("admin")) {
+                        System.out.println("Введите месяц");
+                        int month = scanner.nextInt();
+                        System.out.println(waterMeterService.getMeterReadingsInMonthForAdmin( month).toString());
                     }else {
                         System.out.println("Введите месяц");
                         int month = scanner.nextInt();
@@ -45,6 +50,8 @@ public class Main {
                     case 4:
                         if(user == null){
                             System.out.println("требуется авторизация");
+                        }else if(user.getStatus().equals("admin")) {
+                            System.out.println(waterMeterService.getMeterReadingsForAdmin().toString());
                         }else {
                             System.out.println(waterMeterService.getMeterReadings(user).toString());
                         }
@@ -54,6 +61,17 @@ public class Main {
                         break;
                     case 6:
                         userService.registration();
+                        break;
+                    case 7:
+                        if(user == null){
+                        System.out.println("требуется авторизация");
+                    }else if( user.getStatus().equals("user")) {
+                            System.out.println("Правами может управлять только администратор");
+                        } else {
+                            System.out.println("Введите id пользователя, которому хотите предоставить права администратора");
+                            int id = scanner.nextInt();
+                           userService.setAdminStatus(id);
+                        }
                         break;
 
                     case 0:
@@ -78,6 +96,7 @@ public class Main {
         System.out.println("4 - История подачи показаний");
         System.out.println("5 - Авторизоваться ");
         System.out.println("6 - Зарегестрироваться");
+        System.out.println("7 - Управление првами администратора");
         System.out.println("0 - Завершение работы");
     }
 

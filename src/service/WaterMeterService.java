@@ -4,7 +4,7 @@ import model.User;
 import model.WaterMeter;
 import storage.waterMeter.WaterMeterStorage;
 
-import java.time.LocalDate;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,9 +15,9 @@ public class WaterMeterService {
 
     public void givingEvidence(User user){
         Scanner scanner1 = new Scanner(System.in);
-        System.out.println("Введите обьем");
+        System.out.println("Введите объем");
         double volume = scanner1.nextDouble();
-        System.out.println("Введите дату в формате YYYY,MM,DD");
+        System.out.println("Введите месяц");
         int data = scanner1.nextInt();
         System.out.println("Если вода горячая введите true, иначе false");
         boolean hot = scanner1.nextBoolean();
@@ -54,4 +54,20 @@ public class WaterMeterService {
         return WaterMeters.reversed();
     }
 
+    public Collection<WaterMeter> getMeterReadingsForAdmin() {
+    return waterMeterStorage.getWaterMeters().reversed().values();
+    }
+
+    public List<WaterMeter> getMeterReadingsInMonthForAdmin( int month){
+        List<WaterMeter> WaterMeters = new LinkedList<WaterMeter>();
+        for (WaterMeter waterMeter : waterMeterStorage.getWaterMeters().reversed().values()) {
+            if ((waterMeter.getMonth()==month)) {
+                WaterMeters.add(waterMeter);
+            }
+        }
+        return WaterMeters;
+    }
+    public WaterMeter getLastMeterReadingsForAdmin(){
+        return waterMeterStorage.getWaterMeters().get(waterMeterStorage.getWaterMeters().size());
+    }
 }
