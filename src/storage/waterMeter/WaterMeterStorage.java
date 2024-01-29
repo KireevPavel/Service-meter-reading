@@ -1,10 +1,8 @@
 package storage.waterMeter;
 
-import exception.NotFoundException;
-import model.User;
+import exception.Exception;
 import model.WaterMeter;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class WaterMeterStorage {
@@ -27,7 +25,7 @@ public class WaterMeterStorage {
     public WaterMeter getById(int id) {
         if (waterMeters.containsKey(id)) {
             return waterMeters.get(id);
-        } else throw new NotFoundException("WaterMeter not found.");
+        } else throw new Exception("WaterMeter not found.");
     }
 
     public LinkedHashMap<Integer, WaterMeter> getWaterMeters() {

@@ -1,8 +1,6 @@
 import model.User;
-import model.WaterMeter;
 import service.UserService;
 import service.WaterMeterService;
-import storage.user.UserStorage;
 
 import java.util.Scanner;
 
@@ -15,78 +13,89 @@ public class Main {
 
 
         while (true) {
-                printMenu();
+            if (user == null || !user.isLoggedIn()) {
+                System.out.println("Выберите действие");
+                System.out.println("1 - Авторизоваться");
+                System.out.println("2 - Зарегестрироваться");
+                System.out.println("0 - Завершение работы");
                 int command = scanner.nextInt();
 
                 switch (command) {
                     case 1:
-                        if(user == null){
-                            System.out.println("требуется авторизация");
-                        }else if(user.getStatus().equals("admin")) {
-                            System.out.println(waterMeterService.getLastMeterReadingsForAdmin().toString());
-                        }else {
-                            System.out.println(waterMeterService.getLastMeterReadings(user).toString());
-                        }
+                        user = userService.authorization(user);
                         break;
                     case 2:
-                        if(user == null){
-                            System.out.println("требуется авторизация");
-                        }else {
-                            waterMeterService.givingEvidence(user);
-                        }
-                        break;
-                    case 3:if(user == null){
-                        System.out.println("требуется авторизация");
-                    }else if (user.getStatus().equals("admin")) {
-                        System.out.println("Введите месяц");
-                        int month = scanner.nextInt();
-                        System.out.println(waterMeterService.getMeterReadingsInMonthForAdmin( month).toString());
-                    }else {
-                        System.out.println("Введите месяц");
-                        int month = scanner.nextInt();
-                        System.out.println(waterMeterService.getMeterReadingsInMonth(user, month).toString());
-                    }
-                        break;
-                    case 4:
-                        if(user == null){
-                            System.out.println("требуется авторизация");
-                        }else if(user.getStatus().equals("admin")) {
-                            System.out.println(waterMeterService.getMeterReadingsForAdmin().toString());
-                        }else {
-                            System.out.println(waterMeterService.getMeterReadings(user).toString());
-                        }
-                        break;
-                    case 5:
-                        user = userService.authorization();
-                        break;
-                    case 6:
                         userService.registration();
                         break;
-                    case 7:
-                        if(user == null){
-                        System.out.println("требуется авторизация");
-                    }else if( user.getStatus().equals("user")) {
-                            System.out.println("Правами может управлять только администратор");
-                        } else {
-                            System.out.println("Введите id пользователя, которому хотите предоставить права администратора");
-                            int id = scanner.nextInt();
-                           userService.setAdminStatus(id);
-                        }
-                        break;
-
                     case 0:
                         System.out.println("Программа завершена");
                         scanner.close();
                         return;
                     default:
                         System.out.println("Введено некорректное значение ");
-                        printMenu();
+
+                }
+            } else {
+                printMenu();
+                int command = scanner.nextInt();
+
+                switch (command) {
+                    case 1:
+                        if (user.getStatus().equals("admin")) {
+                            System.out.println(waterMeterService.getLastMeterReadingsForAdmin().toString());
+                        } else {
+                            System.out.println(waterMeterService.getLastMeterReadings(user).toString());
+                        }
+                        break;
+                    case 2:
+                        waterMeterService.givingEvidence(user);
+                        break;
+                    case 3:
+                        if (user.getStatus().equals("admin")) {
+                            System.out.println("Введите месяц");
+                            int month = scanner.nextInt();
+                            System.out.println(waterMeterService.getMeterReadingsInMonthForAdmin(month).toString());
+                        } else {
+                            System.out.println("Введите месяц");
+                            int month = scanner.nextInt();
+                            System.out.println(waterMeterService.getMeterReadingsInMonth(user, month).toString());
+                        }
+                        break;
+                    case 4:
+                        if (user.getStatus().equals("admin")) {
+                            System.out.println(waterMeterService.getMeterReadingsForAdmin().toString());
+                        } else {
+                            System.out.println(waterMeterService.getMeterReadings(user).toString());
+                        }
+                        break;
+
+                    case 5:
+                        if (user.getStatus().equals("user")) {
+                            System.out.println("Правами может управлять только администратор");
+                        } else {
+                            System.out.println("Введите id пользователя, которому хотите предоставить права администратора");
+                            int id = scanner.nextInt();
+                            userService.setAdminStatus(id);
+                        }
+                        break;
+                    case 6:
+                        userService.logOut(user);
+                        break;
+                    case 7:
+                        System.out.println(userService.getUserStorage());
+                        break;
+                    case 0:
+                        userService.logOut(user);
+                        System.out.println("Программа завершена");
+                        scanner.close();
+                        return;
+
+                    default:
+                        System.out.println("Введено некорректное значение ");
                 }
             }
-
+        }
     }
-
-
 
     public static void printMenu() {
         System.out.println("Что Вы хотите сделать?");
@@ -94,9 +103,7 @@ public class Main {
         System.out.println("2 - Подать показания");
         System.out.println("3 - Показания счетчиков за конкретный месяц");
         System.out.println("4 - История подачи показаний");
-        System.out.println("5 - Авторизоваться ");
-        System.out.println("6 - Зарегестрироваться");
-        System.out.println("7 - Управление првами администратора");
+        System.out.println("5 - Управление првами администратора");
         System.out.println("0 - Завершение работы");
     }
 

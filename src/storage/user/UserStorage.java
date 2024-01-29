@@ -1,7 +1,7 @@
 package storage.user;
 
 import model.User;
-import exception.NotFoundException;
+import exception.Exception;
 
 import java.util.HashMap;
 
@@ -19,18 +19,15 @@ public class UserStorage {
         return ++id;
     }
 
-    public User add(User user) {
+    public void add(User user) {
         user.setId(generateId());
         users.put(user.getId(), user);
-        return user;
     }
 
     public User getById(int id) {
         if (users.containsKey(id)) {
             return users.get(id);
-        } else throw new NotFoundException("User not found.");
+        } else throw new Exception("User not found.");
     }
 
-    public void add(int i, String login, String password, String aNew) {
-    }
 }

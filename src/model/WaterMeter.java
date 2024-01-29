@@ -5,17 +5,17 @@ import java.util.Objects;
 
 public class WaterMeter {
     int id;
-    double volume;
-    int month;
-    boolean hot;
-    User user;
+    double  volumeOfColdWater;
+    double  volumeOfHotWater;
+    LocalDate date;
+    int userId;
 
-    public WaterMeter(int id, double volume, int month, boolean hot, User user) {
+    public WaterMeter(int id, double volumeOfColdWater, double volumeOfHotWater, LocalDate date, int userId) {
         this.id = id;
-        this.volume = volume;
-        this.month = month;
-        this.hot = hot;
-        this.user = user;
+        this.volumeOfColdWater = volumeOfColdWater;
+        this.volumeOfHotWater = volumeOfHotWater;
+        this.date = date;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -26,36 +26,36 @@ public class WaterMeter {
         this.id = id;
     }
 
-    public double getVolume() {
-        return volume;
+    public double getVolumeOfColdWater() {
+        return volumeOfColdWater;
     }
 
-    public void setVolume(double volume) {
-        this.volume = volume;
+    public void setVolumeOfColdWater(double volumeOfColdWater) {
+        this.volumeOfColdWater = volumeOfColdWater;
     }
 
-    public int getMonth() {
-        return month;
+    public double getVolumeOfHotWater() {
+        return volumeOfHotWater;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
+    public void setVolumeOfHotWater(double volumeOfHotWater) {
+        this.volumeOfHotWater = volumeOfHotWater;
     }
 
-    public boolean isHot() {
-        return hot;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setHot(boolean hot) {
-        this.hot = hot;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -63,22 +63,21 @@ public class WaterMeter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WaterMeter that = (WaterMeter) o;
-        return id == that.id && Double.compare(volume, that.volume) == 0 && month == that.month && hot == that.hot && Objects.equals(user, that.user);
+        return id == that.id && Double.compare(volumeOfColdWater, that.volumeOfColdWater) == 0 && Double.compare(volumeOfHotWater, that.volumeOfHotWater) == 0 && userId == that.userId && Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, volume, month, hot, user);
+        return Objects.hash(id, volumeOfColdWater, volumeOfHotWater, date, userId);
     }
 
     @Override
     public String toString() {
         return "WaterMeter{" +
                 "id=" + id +
-                ", volume=" + volume +
-                ", month=" + month +
-                ", hot=" + hot +
-                ", user=" + user +
+                ", volumeOfColdWater=" + volumeOfColdWater +
+                ", volumeOfHotWater=" + volumeOfHotWater +
+                ", date=" + date +
                 '}';
     }
 }
