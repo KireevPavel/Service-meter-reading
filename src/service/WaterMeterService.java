@@ -2,106 +2,23 @@ package service;
 
 import model.User;
 import model.WaterMeter;
-import storage.waterMeter.WaterMeterStorage;
 
-import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 
-import java.util.*;
+public interface WaterMeterService {
 
-public class WaterMeterService {
+    void givingEvidence(User user);
 
-    WaterMeterStorage waterMeterStorage = new WaterMeterStorage();
+    WaterMeter getLastMeterReadings(User user);
 
-    public void givingEvidence(User user)  {
-        LocalDate data = LocalDate.now();
-        if (!waterMeterStorage.getWaterMeters().isEmpty()) {
-            for (WaterMeter waterMeter : waterMeterStorage.getWaterMeters().reversed().values()) {
-                if (waterMeter.getUserId() == user.getId() && waterMeter.getDate().getMonthValue() == data.getMonthValue()) {
-                    System.out.println("Данные уже подавались в этом месяце");
-                } else {
-                    try {
-                        Scanner scanner1 = new Scanner(System.in);
-                        System.out.println("Введите объем горячей воды");
-                        double volumeHot = scanner1.nextDouble();
-                        System.out.println("Введите объем холодной воды");
-                        double volumeCold = scanner1.nextDouble();
+    List<WaterMeter> getMeterReadingsInMonth(User user, int month);
 
+    List<WaterMeter> getMeterReadings(User user);
 
-                        WaterMeter newWaterMeter = new WaterMeter(0, volumeHot, volumeCold, data, user.getId());
-                        waterMeterStorage.add(newWaterMeter);
-                    } catch (Throwable exception) {
-                        System.out.println("Введено неккоректное значение " + exception);
-                    }
-                }
-                break;
-            }
-        }else {
-            try {
-                Scanner scanner1 = new Scanner(System.in);
-                System.out.println("Введите объем горячей воды");
-                double volumeHot = scanner1.nextDouble();
-                System.out.println("Введите объем холодной воды");
-                double volumeCold = scanner1.nextDouble();
+    Collection<WaterMeter> getMeterReadingsForAdmin();
 
+    List<WaterMeter> getMeterReadingsInMonthForAdmin(int month);
 
-                WaterMeter newWaterMeter = new WaterMeter(0, volumeHot, volumeCold, data, user.getId());
-                waterMeterStorage.add(newWaterMeter);
-            } catch (Throwable exception) {
-                System.out.println("Введено неккоректное значение " + exception);
-            }
-        }
-        }
-
-
-    public WaterMeter getLastMeterReadings(User user){
-            WaterMeter lastWaterMeter = null;
-            if (!waterMeterStorage.getWaterMeters().isEmpty()) {
-                for (WaterMeter waterMeter : waterMeterStorage.getWaterMeters().reversed().values()) {
-                    if (waterMeter.getUserId() == user.getId()) {
-                        lastWaterMeter = waterMeter;
-                        break;
-                    }
-                }
-                return lastWaterMeter;
-            }
-        System.out.println("история показаний пуста ");
-            return null;
-    }
-
-    public List<WaterMeter> getMeterReadingsInMonth(User user, int month){
-        List<WaterMeter> WaterMeters = new LinkedList<>();
-        for (WaterMeter waterMeter : waterMeterStorage.getWaterMeters().reversed().values()) {
-            if ((waterMeter.getDate().getMonthValue()==month) && (waterMeter.getUserId()==user.getId())) {
-                WaterMeters.add(waterMeter);
-            }
-        }
-        return WaterMeters;
-    }
-
-    public List<WaterMeter> getMeterReadings(User user){
-        List<WaterMeter> WaterMeters = new LinkedList<>();
-        for (WaterMeter waterMeter : waterMeterStorage.getWaterMeters().values()) {
-            if (waterMeter.getUserId() == user.getId()) {
-                WaterMeters.add(waterMeter);
-            }
-        }
-        return WaterMeters.reversed();
-    }
-
-    public Collection<WaterMeter> getMeterReadingsForAdmin() {
-    return waterMeterStorage.getWaterMeters().reversed().values();
-    }
-
-    public List<WaterMeter> getMeterReadingsInMonthForAdmin( int month){
-        List<WaterMeter> WaterMeters = new LinkedList<>();
-        for (WaterMeter waterMeter : waterMeterStorage.getWaterMeters().reversed().values()) {
-            if ((waterMeter.getDate().getMonthValue()==month)) {
-                WaterMeters.add(waterMeter);
-            }
-        }
-        return WaterMeters;
-    }
-    public WaterMeter getLastMeterReadingsForAdmin(){
-        return waterMeterStorage.getWaterMeters().get(waterMeterStorage.getWaterMeters().size());
-    }
+    WaterMeter getLastMeterReadingsForAdmin();
 }

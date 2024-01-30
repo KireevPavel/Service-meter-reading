@@ -1,13 +1,21 @@
 import model.User;
 import service.UserService;
+import service.UserServiceImpl;
 import service.WaterMeterService;
+import service.WaterMeterServiceImpl;
+import storage.user.InMemoryUserStorage;
+import storage.user.UserStorage;
+import storage.waterMeter.InMemoryWaterMeterStorage;
+import storage.waterMeter.WaterMeterStorage;
 
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        UserService userService = new UserService();
-        WaterMeterService waterMeterService = new WaterMeterService();
+    public static void main(String[] args) throws Exception {
+        WaterMeterStorage waterMeterStorage = new InMemoryWaterMeterStorage();
+        WaterMeterService waterMeterService = new WaterMeterServiceImpl(waterMeterStorage);
+        UserStorage userStorage = new InMemoryUserStorage();
+        UserService userService = new UserServiceImpl(userStorage);
         Scanner scanner = new Scanner(System.in);
         User user = null;
 
@@ -94,6 +102,7 @@ public class Main {
         System.out.println("2 - Зарегестрироваться");
         System.out.println("0 - Завершение работы");
     }
+
     public static void printMenu() {
         System.out.println("Что Вы хотите сделать?");
         System.out.println("1 - Получить актуальные показания счетчиков");
@@ -104,5 +113,5 @@ public class Main {
         System.out.println("0 - Завершение работы");
     }
 
-    }
+}
 

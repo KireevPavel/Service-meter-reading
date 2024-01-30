@@ -5,8 +5,8 @@ import java.util.Objects;
 
 public class WaterMeter {
     int id;
-    double  volumeOfColdWater;
-    double  volumeOfHotWater;
+    double volumeOfColdWater;
+    double volumeOfHotWater;
     LocalDate date;
     int userId;
 
