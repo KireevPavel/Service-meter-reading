@@ -1,4 +1,4 @@
-package model;
+package main.java.ru.ylab.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -63,7 +63,9 @@ public class WaterMeter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WaterMeter that = (WaterMeter) o;
-        return id == that.id && Double.compare(volumeOfColdWater, that.volumeOfColdWater) == 0 && Double.compare(volumeOfHotWater, that.volumeOfHotWater) == 0 && userId == that.userId && Objects.equals(date, that.date);
+        return id == that.id && Double.compare(volumeOfColdWater, that.volumeOfColdWater) == 0 &&
+                Double.compare(volumeOfHotWater, that.volumeOfHotWater) == 0 && userId == that.userId &&
+                Objects.equals(date, that.date);
     }
 
     @Override

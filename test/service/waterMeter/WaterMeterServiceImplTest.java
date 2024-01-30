@@ -1,12 +1,14 @@
 package service.waterMeter;
 
-import model.User;
-import model.WaterMeter;
+import main.java.ru.ylab.model.User;
+import main.java.ru.ylab.model.WaterMeter;
+import main.java.ru.ylab.service.waterMeter.WaterMeterService;
+import main.java.ru.ylab.service.waterMeter.WaterMeterServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import storage.waterMeter.InMemoryWaterMeterStorage;
-import storage.waterMeter.WaterMeterStorage;
+import main.java.ru.ylab.storage.waterMeter.InMemoryWaterMeterStorage;
+import main.java.ru.ylab.storage.waterMeter.WaterMeterStorage;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,9 +27,12 @@ class WaterMeterServiceImplTest {
         waterMeterStorage = new InMemoryWaterMeterStorage();
         waterMeterService = new WaterMeterServiceImpl(waterMeterStorage);
         user = new User(1, "login", "password", true, "user");
-        testWaterMeter = new WaterMeter(1, 5, 1, LocalDate.of(2024, 11, 30), 1);
-        testWaterMeter2 = new WaterMeter(2, 5, 1, LocalDate.of(2024, 12, 31), 1);
-        testWaterMeter3 = new WaterMeter(3, 5, 1, LocalDate.of(2024, 12, 31), 2);
+        testWaterMeter = new WaterMeter(1, 5, 1, LocalDate.of(2024, 11,
+                30), 1);
+        testWaterMeter2 = new WaterMeter(2, 5, 1, LocalDate.of(2024, 12,
+                31), 1);
+        testWaterMeter3 = new WaterMeter(3, 5, 1, LocalDate.of(2024, 12,
+                31), 2);
     }
 
 

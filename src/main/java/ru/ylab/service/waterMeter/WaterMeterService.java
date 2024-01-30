@@ -1,7 +1,7 @@
-package service.waterMeter;
+package main.java.ru.ylab.service.waterMeter;
 
-import model.User;
-import model.WaterMeter;
+import main.java.ru.ylab.model.User;
+import main.java.ru.ylab.model.WaterMeter;
 
 import java.util.Collection;
 import java.util.List;

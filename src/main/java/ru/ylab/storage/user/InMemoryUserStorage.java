@@ -1,7 +1,7 @@
-package storage.user;
+package main.java.ru.ylab.storage.user;
 
-import exception.Exception;
-import model.User;
+import main.java.ru.ylab.exception.Exception;
+import main.java.ru.ylab.model.User;
 
 import java.util.HashMap;
 

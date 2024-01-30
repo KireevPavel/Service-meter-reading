@@ -1,7 +1,7 @@
-package service.user;
+package main.java.ru.ylab.service.user;
 
-import model.User;
-import storage.user.UserStorage;
+import main.java.ru.ylab.model.User;
+import main.java.ru.ylab.storage.user.UserStorage;
 
 import java.util.HashMap;
 import java.util.Scanner;

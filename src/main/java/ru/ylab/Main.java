@@ -1,12 +1,14 @@
-import model.User;
-import service.user.UserService;
-import service.user.UserServiceImpl;
-import service.waterMeter.WaterMeterService;
-import service.waterMeter.WaterMeterServiceImpl;
-import storage.user.InMemoryUserStorage;
-import storage.user.UserStorage;
-import storage.waterMeter.InMemoryWaterMeterStorage;
-import storage.waterMeter.WaterMeterStorage;
+package main.java.ru.ylab;
+
+import main.java.ru.ylab.model.User;
+import main.java.ru.ylab.service.user.UserService;
+import main.java.ru.ylab.service.user.UserServiceImpl;
+import main.java.ru.ylab.service.waterMeter.WaterMeterService;
+import main.java.ru.ylab.service.waterMeter.WaterMeterServiceImpl;
+import main.java.ru.ylab.storage.user.InMemoryUserStorage;
+import main.java.ru.ylab.storage.user.UserStorage;
+import main.java.ru.ylab.storage.waterMeter.InMemoryWaterMeterStorage;
+import main.java.ru.ylab.storage.waterMeter.WaterMeterStorage;
 
 import java.util.Scanner;
 

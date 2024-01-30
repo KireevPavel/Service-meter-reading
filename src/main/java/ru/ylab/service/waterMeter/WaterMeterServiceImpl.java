@@ -1,9 +1,8 @@
-package service.waterMeter;
+package main.java.ru.ylab.service.waterMeter;
 
-import model.User;
-import model.WaterMeter;
-import service.waterMeter.WaterMeterService;
-import storage.waterMeter.WaterMeterStorage;
+import main.java.ru.ylab.model.User;
+import main.java.ru.ylab.model.WaterMeter;
+import main.java.ru.ylab.storage.waterMeter.WaterMeterStorage;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -24,7 +23,8 @@ public class WaterMeterServiceImpl implements WaterMeterService {
         LocalDate data = LocalDate.now();
         if (!waterMeterStorage.getWaterMeters().isEmpty()) {
             for (WaterMeter waterMeter : waterMeterStorage.getWaterMeters().reversed().values()) {
-                if (waterMeter.getUserId() == user.getId() && waterMeter.getDate().getMonthValue() == data.getMonthValue()) {
+                if (waterMeter.getUserId() == user.getId() &&
+                        waterMeter.getDate().getMonthValue() == data.getMonthValue()) {
                     System.out.println("Данные уже подавались в этом месяце");
                 } else {
                     try {

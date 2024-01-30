@@ -1,7 +1,7 @@
-package storage.waterMeter;
+package main.java.ru.ylab.storage.waterMeter;
 
-import exception.Exception;
-import model.WaterMeter;
+import main.java.ru.ylab.exception.Exception;
+import main.java.ru.ylab.model.WaterMeter;
 
 import java.util.LinkedHashMap;
 

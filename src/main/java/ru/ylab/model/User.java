@@ -1,4 +1,4 @@
-package model;
+package main.java.ru.ylab.model;
 
 import java.util.Objects;
 
@@ -62,7 +62,8 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && loggedIn == user.loggedIn && login.equals(user.login) && password.equals(user.password) && status.equals(user.status);
+        return id == user.id && loggedIn == user.loggedIn && login.equals(user.login) && password.equals(user.password)
+                && status.equals(user.status);
     }
 
     @Override

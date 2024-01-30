@@ -1,6 +1,6 @@
-package service.user;
+package main.java.ru.ylab.service.user;
 
-import model.User;
+import main.java.ru.ylab.model.User;
 
 import java.util.HashMap;
 
