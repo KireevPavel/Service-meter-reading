@@ -1,7 +1,8 @@
-package service;
+package service.waterMeter;
 
 import model.User;
 import model.WaterMeter;
+import service.waterMeter.WaterMeterService;
 import storage.waterMeter.WaterMeterStorage;
 
 import java.time.LocalDate;

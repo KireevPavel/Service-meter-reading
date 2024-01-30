@@ -1,8 +1,8 @@
 import model.User;
-import service.UserService;
-import service.UserServiceImpl;
-import service.WaterMeterService;
-import service.WaterMeterServiceImpl;
+import service.user.UserService;
+import service.user.UserServiceImpl;
+import service.waterMeter.WaterMeterService;
+import service.waterMeter.WaterMeterServiceImpl;
 import storage.user.InMemoryUserStorage;
 import storage.user.UserStorage;
 import storage.waterMeter.InMemoryWaterMeterStorage;
@@ -11,7 +11,7 @@ import storage.waterMeter.WaterMeterStorage;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         WaterMeterStorage waterMeterStorage = new InMemoryWaterMeterStorage();
         WaterMeterService waterMeterService = new WaterMeterServiceImpl(waterMeterStorage);
         UserStorage userStorage = new InMemoryUserStorage();

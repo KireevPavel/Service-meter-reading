@@ -1,4 +1,4 @@
-package service;
+package service.waterMeter;
 
 import model.User;
 import model.WaterMeter;
