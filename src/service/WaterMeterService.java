@@ -12,49 +12,60 @@ public class WaterMeterService {
 
     WaterMeterStorage waterMeterStorage = new WaterMeterStorage();
 
-    public void givingEvidence(User user) {
+    public void givingEvidence(User user)  {
         LocalDate data = LocalDate.now();
         if (!waterMeterStorage.getWaterMeters().isEmpty()) {
             for (WaterMeter waterMeter : waterMeterStorage.getWaterMeters().reversed().values()) {
                 if (waterMeter.getUserId() == user.getId() && waterMeter.getDate().getMonthValue() == data.getMonthValue()) {
                     System.out.println("Данные уже подавались в этом месяце");
                 } else {
-                    Scanner scanner1 = new Scanner(System.in);
-                    System.out.println("Введите объем горячей воды");
-                    double volumeHot = scanner1.nextDouble();
-                    System.out.println("Введите объем холодной воды");
-                    double volumeCold = scanner1.nextDouble();
+                    try {
+                        Scanner scanner1 = new Scanner(System.in);
+                        System.out.println("Введите объем горячей воды");
+                        double volumeHot = scanner1.nextDouble();
+                        System.out.println("Введите объем холодной воды");
+                        double volumeCold = scanner1.nextDouble();
 
 
-                    WaterMeter newWaterMeter = new WaterMeter(0, volumeHot, volumeCold, data, user.getId());
-                    waterMeterStorage.add(newWaterMeter);
+                        WaterMeter newWaterMeter = new WaterMeter(0, volumeHot, volumeCold, data, user.getId());
+                        waterMeterStorage.add(newWaterMeter);
+                    } catch (Throwable exception) {
+                        System.out.println("Введено неккоректное значение " + exception);
+                    }
                 }
                 break;
             }
         }else {
-            Scanner scanner1 = new Scanner(System.in);
-            System.out.println("Введите объем горячей воды");
-            double volumeHot = scanner1.nextDouble();
-            System.out.println("Введите объем холодной воды");
-            double volumeCold = scanner1.nextDouble();
+            try {
+                Scanner scanner1 = new Scanner(System.in);
+                System.out.println("Введите объем горячей воды");
+                double volumeHot = scanner1.nextDouble();
+                System.out.println("Введите объем холодной воды");
+                double volumeCold = scanner1.nextDouble();
 
 
-            WaterMeter newWaterMeter = new WaterMeter(0, volumeHot, volumeCold, data, user.getId());
-            waterMeterStorage.add(newWaterMeter);
+                WaterMeter newWaterMeter = new WaterMeter(0, volumeHot, volumeCold, data, user.getId());
+                waterMeterStorage.add(newWaterMeter);
+            } catch (Throwable exception) {
+                System.out.println("Введено неккоректное значение " + exception);
+            }
         }
-
         }
 
 
     public WaterMeter getLastMeterReadings(User user){
-       WaterMeter lastWaterMeter = null;
-        for (WaterMeter waterMeter : waterMeterStorage.getWaterMeters().reversed().values()) {
-            if (waterMeter.getUserId() == user.getId()) {
-                lastWaterMeter = waterMeter;
-                break;
+            WaterMeter lastWaterMeter = null;
+            if (!waterMeterStorage.getWaterMeters().isEmpty()) {
+                for (WaterMeter waterMeter : waterMeterStorage.getWaterMeters().reversed().values()) {
+                    if (waterMeter.getUserId() == user.getId()) {
+                        lastWaterMeter = waterMeter;
+                        break;
+                    }
+                }
+                return lastWaterMeter;
             }
-        }
-        return lastWaterMeter;
+        System.out.println("история показаний пуста ");
+            return null;
     }
 
     public List<WaterMeter> getMeterReadingsInMonth(User user, int month){

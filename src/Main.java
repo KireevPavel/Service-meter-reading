@@ -11,13 +11,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         User user = null;
 
-
         while (true) {
             if (user == null || !user.isLoggedIn()) {
-                System.out.println("Выберите действие");
-                System.out.println("1 - Авторизоваться");
-                System.out.println("2 - Зарегестрироваться");
-                System.out.println("0 - Завершение работы");
+                printStartMenu();
                 int command = scanner.nextInt();
 
                 switch (command) {
@@ -42,9 +38,9 @@ public class Main {
                 switch (command) {
                     case 1:
                         if (user.getStatus().equals("admin")) {
-                            System.out.println(waterMeterService.getLastMeterReadingsForAdmin().toString());
+                            System.out.println(waterMeterService.getLastMeterReadingsForAdmin());
                         } else {
-                            System.out.println(waterMeterService.getLastMeterReadings(user).toString());
+                            System.out.println(waterMeterService.getLastMeterReadings(user));
                         }
                         break;
                     case 2:
@@ -54,18 +50,18 @@ public class Main {
                         if (user.getStatus().equals("admin")) {
                             System.out.println("Введите месяц");
                             int month = scanner.nextInt();
-                            System.out.println(waterMeterService.getMeterReadingsInMonthForAdmin(month).toString());
+                            System.out.println(waterMeterService.getMeterReadingsInMonthForAdmin(month));
                         } else {
                             System.out.println("Введите месяц");
                             int month = scanner.nextInt();
-                            System.out.println(waterMeterService.getMeterReadingsInMonth(user, month).toString());
+                            System.out.println(waterMeterService.getMeterReadingsInMonth(user, month));
                         }
                         break;
                     case 4:
                         if (user.getStatus().equals("admin")) {
-                            System.out.println(waterMeterService.getMeterReadingsForAdmin().toString());
+                            System.out.println(waterMeterService.getMeterReadingsForAdmin());
                         } else {
-                            System.out.println(waterMeterService.getMeterReadings(user).toString());
+                            System.out.println(waterMeterService.getMeterReadings(user));
                         }
                         break;
 
@@ -78,12 +74,7 @@ public class Main {
                             userService.setAdminStatus(id);
                         }
                         break;
-                    case 6:
-                        userService.logOut(user);
-                        break;
-                    case 7:
-                        System.out.println(userService.getUserStorage());
-                        break;
+
                     case 0:
                         userService.logOut(user);
                         System.out.println("Программа завершена");
@@ -97,6 +88,12 @@ public class Main {
         }
     }
 
+    public static void printStartMenu() {
+        System.out.println("Выберите действие");
+        System.out.println("1 - Авторизоваться");
+        System.out.println("2 - Зарегестрироваться");
+        System.out.println("0 - Завершение работы");
+    }
     public static void printMenu() {
         System.out.println("Что Вы хотите сделать?");
         System.out.println("1 - Получить актуальные показания счетчиков");
